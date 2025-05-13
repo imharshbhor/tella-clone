@@ -7,7 +7,7 @@ import More from './buttons/More'
 
 const RecordButtons = () => {
   return (
-    <section className='flex flex-row items-center justify-center space-x-4'>
+    <section className='flex flex-row items-center justify-center space-x-3 ml-2'>
         <Audio/>
         <Camera/>
         <div className='px-4'><Record/></div>

@@ -12,7 +12,7 @@ import { recordingContext } from '@/app/video/record/page';
 
 const Camera = () => {
 
-    const {isCamOn, setIsCamOn} = React.useContext(recordingContext)
+    const {isCamOn, setIsCamOn, stream} = React.useContext(recordingContext)
 
     const [micDevices, setMicDevices] = React.useState<MediaDeviceInfo[]>([]);
     const [selectedDevice, setSelectedDevice] = React.useState(
@@ -33,16 +33,16 @@ const Camera = () => {
         };
 
         getMicDevices();
-    }, []);
+    }, [stream]);
 
     return (
         <div className={`flex flex-row justify-end w-[8vw] rounded-lg text-xs text-white/70 font-semibold hover:bg-[#45464a]`}>
-            <div className='flex w-full justify-end select-none' onClick={() => { setIsCamOn(!isCamOn) }}>
+            <div className='flex w-[6vw] justify-end mr-7 mt-1.5 select-none absolute' onClick={() => { setIsCamOn(!isCamOn) }}>
                 {isCamOn ? <div className='flex flex-col space-x-0.5 justify-center items-center pt-0.5'><CameraOff size={18} color='white' /><span className='pt-0.5'>Start camera</span></div>
                     : <div className='flex flex-col space-x-0.5 justify-center items-center pt-0.5'><CameraIcon size={18} color='white' /><span className='pt-0.5'>Stop camera</span></div>}
             </div>
             <DropdownMenu>
-                <DropdownMenuTrigger className={`px-2 h-12 rounded-r-lg  focus:outline-1 outline-primary hover:bg-[#57585c]`}><ChevronUp size={16} /></DropdownMenuTrigger>
+                <DropdownMenuTrigger className={`px-1 h-12 rounded-r-lg  focus:outline-1 outline-primary hover:bg-[#57585c]`}><ChevronUp strokeWidth={3} size={14} /></DropdownMenuTrigger>
                 <DropdownMenuContent className='max-w-80'>
                     {micDevices ? micDevices.map((device) => (
                         <DropdownMenuRadioGroup key={Math.random()}  value={selectedDevice} onValueChange={setSelectedDevice}>

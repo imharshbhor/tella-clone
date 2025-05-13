@@ -12,17 +12,35 @@ interface RecordingContextType {
     setIsMuted: React.Dispatch<React.SetStateAction<boolean>>;
     isCamOn: boolean;
     setIsCamOn: React.Dispatch<React.SetStateAction<boolean>>;
+    stream: MediaStream;
 }
 
-export const recordingContext = React.createContext<RecordingContextType>({ isMuted: true, setIsMuted: () => { }, isCamOn: true, setIsCamOn: () => { } })
+export const recordingContext = React.createContext<RecordingContextType>({ isMuted: true, setIsMuted: () => { }, isCamOn: true, setIsCamOn: () => { }, stream: {} })
 
 const Record = () => {
 
     const [isMuted, setIsMuted] = React.useState(true)
     const [isCamOn, setIsCamOn] = React.useState(true)
+    const [stream, setStream] = React.useState({})
+
+    React.useEffect(() => {
+        const askForPermissions = async () => {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({
+                    audio: true,
+                    video: true,
+                });
+                console.log(stream)
+                setStream(stream)
+            } catch (err) {
+                console.log("Error accessing media devices:", err);
+            }
+        };
+        askForPermissions();
+    }, []);
 
     return (
-        <recordingContext.Provider value={{ isMuted, setIsMuted, isCamOn, setIsCamOn }}>
+        <recordingContext.Provider value={{ isMuted, setIsMuted, isCamOn, setIsCamOn, stream }}>
             <Tabs defaultValue="record" className='gap-0'>
 
                 <div className='flex flex-col justify-between items-center bg-[#1f2023] text-white p-6 h-[82.5vh]'>
@@ -44,7 +62,7 @@ const Record = () => {
                 </div>
 
                 <div className='flex flex-row justify-center items-center bg-[#303236] p-4 h-[9.5vh] rounded-b-4xl'>
-                    <TabsContent value="record" className='flex flex-row justify-center items-center gap-4'>
+                    <TabsContent value="record" className='flex flex-row justify-center items-center'>
                         <RecordButtons />
                     </TabsContent>
                     <TabsContent value="select" className='flex flex-row justify-center items-center'>
