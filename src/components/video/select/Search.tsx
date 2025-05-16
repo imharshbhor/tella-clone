@@ -15,7 +15,7 @@ const Search = () => {
 
             <input
                 type="text"
-                className="w-full h-9 pl-6 font-medium rounded-4xl border-transparent focus:border-indigo-800 bg-[#1f2023] text-white/80"
+                className="w-full h-9 pl-6 font-medium rounded-4xl focus:ring-primary focus:outline-1 outline-primary bg-[#1f2023] text-white/80"
                 onFocus={() => setIsFocused(true)}
                 onBlur={() => setIsFocused(false)}
             />
