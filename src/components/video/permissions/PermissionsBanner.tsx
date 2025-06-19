@@ -28,7 +28,7 @@ const PermissionsBanner = () => {
             const videoTrack = stream.getVideoTracks()[0];
             stream.addTrack(videoTrack);
         } catch (err) {
-            console.log("Error accessing media devices:", err);
+            //  console.log("Error accessing media devices:", err);
         }
     };
     React.useEffect(() => {

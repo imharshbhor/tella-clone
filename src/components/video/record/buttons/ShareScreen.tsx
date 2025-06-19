@@ -12,10 +12,10 @@ const ShareScreen = () => {
 
         if (isSharing) {
             displayStream?.getVideoTracks().forEach(track => {
-                    console.log("stopping track", track.label)
-                    track.stop();
-                    displayStream.removeTrack(track);
-                    setIsSharing(false);
+                //  console.log("stopping track", track.label)
+                track.stop();
+                displayStream.removeTrack(track);
+                setIsSharing(false);
             });
         } else {
             try {
@@ -28,7 +28,7 @@ const ShareScreen = () => {
                 setDisplayStream(newDisplayStream)
                 setIsSharing(true);
                 displayTrack.onended = () => {
-                    console.log("track ended", displayTrack.label)
+                    //  console.log("track ended", displayTrack.label)
                     displayTrack.stop();
                     displayStream?.removeTrack(displayTrack);
                     setIsSharing(false);
