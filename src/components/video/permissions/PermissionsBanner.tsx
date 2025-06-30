@@ -16,7 +16,7 @@ import { mediaContext } from '@/app/video/record/page'
 
 const PermissionsBanner = () => {
 
-    const { setStream } = React.useContext(mediaContext)
+    const { setVideoStream, setDisplayStream } = React.useContext(mediaContext)
 
     const askForPermissions = async () => {
         try {
@@ -24,7 +24,7 @@ const PermissionsBanner = () => {
                 audio: true,
                 video: true,
             });
-            setStream(stream)
+            setVideoStream(stream)
             const videoTrack = stream.getVideoTracks()[0];
             stream.addTrack(videoTrack);
         } catch (err) {
@@ -36,7 +36,7 @@ const PermissionsBanner = () => {
     })
 
     return (
-        <>
+        <div className='flex flex-col justify-center items-center gap-2 h-[82.5vh]'>
             <Image alt="emoji" src='/emoji/unlock.webp' width={32} height={32} />
             <h2 className='text-xl mt-2 font-medium'>Permission to record</h2>
             <span className='text-sm text-white/50 font-medium text-center'>We need access to your camera and microphone.</span>
@@ -70,7 +70,7 @@ const PermissionsBanner = () => {
                     </DialogFooter>
                 </DialogContent>
             </Dialog>
-        </>
+        </div>
     )
 }
 

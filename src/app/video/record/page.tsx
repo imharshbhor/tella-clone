@@ -46,6 +46,7 @@ const Record = () => {
     const videoRef = React.useRef<HTMLVideoElement | null>(null);
     const displayRef = React.useRef<HTMLVideoElement | null>(null);
     const [countdown, setCountdown] = React.useState<number | null>(null);
+    const [timer, setTimer] = React.useState(0);
 
     const initStream = async () => {
         const stream = await navigator.mediaDevices.getUserMedia({
@@ -53,12 +54,15 @@ const Record = () => {
             video: true,
         });
         setVideoStream(stream)
-        const videoTrack = stream.getVideoTracks()[0];
-        stream.addTrack(videoTrack);
+        // const videoTrack = stream.getVideoTracks()[0];
+        // stream.addTrack(videoTrack);
     }
 
     React.useEffect(() => {
-        initStream()
+        if (!videoStream) {
+            initStream();
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     // When starting recording, trigger countdown
@@ -67,7 +71,6 @@ const Record = () => {
     };
 
     React.useEffect(() => {
-
         if (countdown && countdown > 0) {
             const timer = setTimeout(() => setCountdown(countdown - 1), 1000);
             return () => clearTimeout(timer);
@@ -76,6 +79,35 @@ const Record = () => {
             setIsRecording(true);
         }
     }, [countdown]);
+
+    React.useEffect(() => {
+        let interval: NodeJS.Timeout | null = null;
+        let startTimeout: NodeJS.Timeout | null = null;
+        if (isRecording) {
+            setTimer(0); // Reset timer at start
+            startTimeout = setTimeout(() => {
+                interval = setInterval(() => {
+                    setTimer(prev => prev + 1);
+                }, 1000);
+            }, 3000);
+        }
+        return () => {
+            if (interval) clearInterval(interval);
+            if (startTimeout) clearTimeout(startTimeout);
+        };
+    }, [isRecording]);
+
+    const formatTime = (seconds: number) => {
+        const m = String(Math.floor(seconds / 60)).padStart(2, '0');
+        const s = String(seconds % 60).padStart(2, '0');
+        return (
+            <span className="flex flex-row justify-center items-center">
+                <p>{m}</p>
+                <p className="mb-[3px] flex items-center justify-center">:</p>
+                <p>{s}</p>
+            </span>
+        );
+    };
 
     return (
         <mediaContext.Provider value={{ isMuted, setIsMuted, isCamOff, setIsCamOff, isSharing, setIsSharing, videoStream, setVideoStream, videoRef, displayRef, displayStream, setDisplayStream, isRecording, setIsRecording, handleStartRecording }}>
@@ -103,7 +135,9 @@ const Record = () => {
                             <TabsTrigger value="upload">Upload</TabsTrigger>
                         </TabsList>
                         :
-                        <div className='z-10 font-semibold px-3 py-1 rounded-full bg-[#2c2e32]/80 absolute bottom-[9.5rem] select-none'>00:00</div>
+                        <div className='z-10 font-semibold px-3 py-1 rounded-full bg-[#2c2e32]/80 absolute bottom-[9.5rem] select-none'>
+                            {formatTime(timer)}
+                        </div>
                     }
                 </div>
 

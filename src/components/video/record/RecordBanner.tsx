@@ -22,7 +22,7 @@ const RecordBanner = () => {
             //  console.log("displayStream", displayStream.getVideoTracks())
         }
         // console.log(isCamOff, isSharing)
-    })
+    }, [videoStream, videoRef, displayStream, displayRef])
 
     React.useEffect(() => {
         const checkDevices = async () => {

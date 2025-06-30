@@ -22,11 +22,11 @@ const RecordButtons = () => {
                     <ShareScreen />
                     <More />
                 </>
-                : <>
+                : <div className='flex flex-row justify-center mr-2'>
                     <Cancel />
                     <div className='px-4'><Record isRecording={isRecording} setIsRecording={setIsRecording} /></div>
                     <Restart />
-                </>
+                </div>
             }
         </section>
     )

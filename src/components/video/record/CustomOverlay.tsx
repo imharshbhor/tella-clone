@@ -1,25 +1,24 @@
 import React from 'react';
 
 const icons = [
-    '🎬', // 3
-    '🎥', // 2
-    '🔴', // 1
+    '😎', // 3
+    '🏁', // 2
+    '🚀', // 1
 ];
 
 const messages = [
+    'You look great today',
     'Get ready...',
-    'Almost there...',
-    'Recording starts!',
+    'Ok here we go!',
 ];
 
 const CustomOverlay = ({ count }: { count: number }) => {
     if (count < 1 || count > 3) return null;
     const index = 3 - count;
     return (
-        <div className="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-60 z-50 select-none">
-            <span className="text-8xl mb-4 animate-pulse">{icons[index]}</span>
-            <span className="text-7xl font-bold text-white mb-2">{count}</span>
-            <span className="text-2xl text-white font-semibold animate-fadeInUp">{messages[index]}</span>
+        <div className="absolute inset-0 flex flex-col items-center justify-center bg-white/10 bg-opacity-60 z-50 select-none">
+            <span className="text-8xl font-bold text-white mb-2.5">{count}</span>
+            <span className="text-lg text-black font-medium rounded-sm bg-white py-1.5 px-2">{icons[index]} {messages[index]}</span>
         </div>
     );
 };
