@@ -11,7 +11,7 @@ interface ClipsState {
     clips: Clip[];
     lastAddedClipId: string | null;
     addClip: (clip: Clip) => void;
-    clearLastAdded: () => void;w
+    clearLastAdded: () => void;
     reorderClips: (newOrder: Clip[]) => void;
 }
 
