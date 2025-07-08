@@ -7,13 +7,14 @@ import More from './buttons/More'
 import Cancel from './buttons/Cancel'
 import Restart from './buttons/Restart'
 import { mediaContext } from '@/app/video/record/page'
+import Preview from './Preview'
 
 const RecordButtons = () => {
 
-    const { isRecording, setIsRecording, handleStartRecording } = React.useContext(mediaContext)
+    const { isRecording, setIsRecording } = React.useContext(mediaContext)
 
     return (
-        <section className='flex flex-row items-center justify-center space-x-3 ml-2'>
+        <section className='flex flex-row items-center justify-center space-x-3 ml-[6.8rem]'>
             {!isRecording ?
                 <>
                     <Audio />
@@ -22,7 +23,7 @@ const RecordButtons = () => {
                     <ShareScreen />
                     <More />
                 </>
-                : <div className='flex flex-row justify-center mr-2'>
+                : <div className='flex flex-row justify-center mr-[0.7rem]'>
                     <Cancel />
                     <div className='px-4'><Record isRecording={isRecording} setIsRecording={setIsRecording} /></div>
                     <Restart />

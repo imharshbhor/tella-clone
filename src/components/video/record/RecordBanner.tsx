@@ -118,7 +118,7 @@ const RecordBanner = () => {
     else if (!isCamOff && isSharing) {
         return (
             <>
-                <div className="flex flex-row h-[81.8vh] p-2 gap-2 justify-between rounded-lg">
+                <div className="flex flex-row h-[82.4vh] p-2 gap-2 justify-between rounded-lg">
                     <div className='rounded-lg'>
                         <video
                             ref={displayRef}
@@ -136,7 +136,7 @@ const RecordBanner = () => {
                             playsInline
                             className={`aspect-square max-h-[55vh] rounded-lg object-cover ${isMirrored ? 'rotate-y-180' : ''}`}
                         />
-                        <div className='w-10 h-10 flex justify-center items-center border border-white/10 rounded-full absolute top-60 right-4 bg-[#303236]/50 cursor-pointer' onClick={() => { setIsMirrored(!isMirrored) }}>
+                        <div className='w-10 h-10 flex justify-center items-center border border-white/10 rounded-full absolute top-93 right-4 bg-[#303236]/50 cursor-pointer' onClick={() => { setIsMirrored(!isMirrored) }}>
                             {isMirrored ?
                                 <svg aria-hidden="false" aria-label="Mirror camera" className="stroke-current w-5 h-5" height="20" width="20" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 1V19" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"></path><path d="M8 3H4C2.89543 3 2 3.89543 2 5V16C2 17.1046 2.89543 18 4 18H8" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"></path><path d="M12 3H16C17.1046 3 18 3.89543 18 5V16C18 17.1046 17.1046 18 16 18H12" stroke="currentColor" strokeDasharray="2 3" strokeLinecap="round" strokeLinejoin="round"></path></svg>
                                 :

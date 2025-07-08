@@ -3,9 +3,10 @@ import CancelIcon from './icons/cancel/CancelIcon'
 import { mediaContext } from '@/app/video/record/page'
 
 const Cancel = () => {
-    const { setIsRecording } = React.useContext(mediaContext)
+    const { handleCancelRecording } = React.useContext(mediaContext)
+
     const handleCancel = () => {
-        setIsRecording(false)
+        handleCancelRecording()
     }
     return (
         <div className="flex flex-row justify-center w-[8.5vw] h-12 rounded-lg text-xs text-white/70 font-semibold hover:bg-[#45464a]" onClick={handleCancel}>
